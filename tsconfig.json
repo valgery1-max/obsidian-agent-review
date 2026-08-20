@@ -19,6 +19,5 @@
     "skipLibCheck": true,
     "types": ["node"]
   },
-  "include": ["src/**/*.ts", "tests/**/*.ts"],
-  "exclude": ["apps/desktop"]
+  "include": ["src/**/*.ts", "tests/**/*.ts"]
 }
