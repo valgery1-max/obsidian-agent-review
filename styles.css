@@ -1,0 +1,3067 @@
+.codex-review-sidebar {
+  --codex-review-accent: var(--interactive-accent);
+  --codex-review-accent-hover: color-mix(in srgb, var(--interactive-accent) 82%, var(--text-normal));
+  --codex-review-accent-soft: color-mix(in srgb, var(--codex-review-accent) 18%, transparent);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+:is(
+  .codex-review-comment-modal,
+  .codex-review-restore-modal,
+  .codex-review-goal-modal,
+  .codex-review-busy-modal,
+  .codex-review-login-modal,
+  .codex-review-instruction-link-dialog,
+  .codex-review-instructions-dialog
+) button.mod-cta,
+.codex-review-sidebar button.mod-cta {
+  border-color: var(--interactive-accent);
+  background: var(--interactive-accent);
+  color: var(--text-on-accent);
+}
+
+:is(
+  .codex-review-comment-modal,
+  .codex-review-restore-modal,
+  .codex-review-goal-modal,
+  .codex-review-busy-modal,
+  .codex-review-login-modal,
+  .codex-review-instruction-link-dialog,
+  .codex-review-instructions-dialog
+) button.mod-cta:hover:not(:disabled),
+:is(
+  .codex-review-comment-modal,
+  .codex-review-restore-modal,
+  .codex-review-goal-modal,
+  .codex-review-busy-modal,
+  .codex-review-login-modal,
+  .codex-review-instruction-link-dialog,
+  .codex-review-instructions-dialog
+) button.mod-cta:focus-visible,
+.codex-review-sidebar button.mod-cta:hover:not(:disabled),
+.codex-review-sidebar button.mod-cta:focus-visible {
+  border-color: color-mix(in srgb, var(--interactive-accent) 82%, var(--text-normal));
+  background: color-mix(in srgb, var(--interactive-accent) 82%, var(--text-normal));
+  color: var(--text-on-accent);
+}
+
+.codex-review-sidebar-chrome {
+  z-index: 4;
+  flex: none;
+  padding: 12px 12px 0;
+  background: var(--background-primary);
+}
+
+.codex-review-sidebar-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 0 12px 12px;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+
+.codex-review-sidebar-body.is-chat {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.codex-review-sidebar-body.is-comments {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-bottom: 0;
+}
+
+.codex-review-sidebar-header,
+.codex-review-thread-heading,
+.codex-review-card-top,
+.codex-review-modal-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.codex-review-sidebar-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.codex-review-sidebar-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.codex-review-title-wrap,
+.codex-review-toolbar,
+.codex-review-card-actions,
+.codex-review-target {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.codex-review-toolbar {
+  gap: 2px;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.codex-review-toolbar .codex-review-icon-button {
+  width: 27px;
+  height: 28px;
+  min-width: 27px;
+}
+
+.codex-review-title-wrap h3,
+.codex-review-thread-heading h2 {
+  margin: 0;
+  font-size: var(--font-ui-medium);
+  letter-spacing: 0;
+}
+
+.codex-review-count {
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 10px;
+  background: var(--codex-review-accent-soft);
+  color: var(--text-normal);
+  font-size: var(--font-ui-smaller);
+  line-height: 20px;
+  text-align: center;
+}
+
+.codex-review-icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  padding: 0;
+}
+
+.codex-review-icon-button svg {
+  width: 16px;
+  height: 16px;
+}
+
+.codex-review-target-row {
+  display: flex;
+  gap: 6px;
+  margin: 7px 0 8px;
+}
+
+.codex-review-provider-select {
+  flex: 0 0 82px;
+  width: 82px;
+  min-width: 0;
+  min-height: 30px;
+  padding: 3px 6px;
+  border-color: var(--background-modifier-border);
+  border-radius: 5px;
+  background: transparent;
+  color: var(--text-normal);
+}
+
+.codex-review-target {
+  flex: 1 1 auto;
+  min-height: 30px;
+  min-width: 0;
+  margin: 0;
+  padding: 6px 8px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+  box-shadow: none;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  text-align: left;
+}
+
+.codex-review-target.is-unselected {
+  border-color: var(--color-blue);
+  background: color-mix(in srgb, var(--color-blue) 12%, transparent);
+  color: var(--color-blue);
+}
+
+.codex-review-target span:last-child {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.codex-review-instructions-button {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  width: 100%;
+  min-height: 30px;
+  margin: -2px 0 8px;
+  padding: 5px 8px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+  box-shadow: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.codex-review-instructions-button:hover:not(:disabled) {
+  border-color: var(--background-modifier-border-hover);
+  background: var(--background-modifier-hover);
+  color: var(--text-normal);
+}
+
+.codex-review-instructions-button.is-configured {
+  border-color: color-mix(in srgb, var(--interactive-accent) 48%, var(--background-modifier-border));
+  background: color-mix(in srgb, var(--interactive-accent) 9%, transparent);
+  color: var(--interactive-accent);
+}
+
+.codex-review-instructions-button svg {
+  width: 15px;
+  height: 15px;
+  flex: none;
+}
+
+.codex-review-context {
+  margin: -2px 0 8px;
+}
+
+.codex-review-context-add,
+.codex-review-follow-up-skill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 28px;
+  padding: 4px 8px;
+  border-color: var(--background-modifier-border);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+}
+
+.codex-review-context-add svg,
+.codex-review-follow-up-skill svg {
+  width: 14px;
+  height: 14px;
+}
+
+.codex-review-context-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.codex-review-context-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  padding: 3px 4px 3px 7px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 5px;
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+}
+
+.codex-review-context-item > span:first-child,
+.codex-review-context-item > span:first-child svg {
+  width: 14px;
+  height: 14px;
+  flex: none;
+}
+
+.codex-review-context-name {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.codex-review-context-item .codex-review-icon-button {
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+.codex-review-model-wrap {
+  display: flex;
+  flex: 1 1 112px;
+  align-items: center;
+  max-width: 165px;
+  min-width: 0;
+  min-height: 28px;
+  margin-left: auto;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+  color: var(--text-muted);
+}
+
+.codex-review-model-wrap select {
+  min-width: 0;
+  width: 100%;
+  height: 26px;
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+}
+
+.codex-review-scope {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  padding: 2px;
+  border-radius: 6px;
+  background: var(--background-secondary);
+}
+
+.codex-review-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
+  margin: 2px 0 12px;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.codex-review-tabs button {
+  position: relative;
+  min-width: 0;
+  padding: 7px 4px 9px;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.codex-review-tabs button.is-active {
+  color: var(--text-normal);
+}
+
+.codex-review-tabs button.is-active::after {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  background: var(--codex-review-accent);
+  content: "";
+}
+
+.codex-review-tabs button.has-running-task::before {
+  position: absolute;
+  top: 7px;
+  right: max(8px, calc(50% - 34px));
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--interactive-accent);
+  content: "";
+}
+
+.codex-review-scope button {
+  min-width: 0;
+  min-height: 36px;
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+  font-size: var(--font-ui-smaller);
+  line-height: 1.2;
+  white-space: normal;
+}
+
+.codex-review-scope button.is-active {
+  background: var(--background-primary);
+  box-shadow: var(--shadow-s);
+}
+
+.codex-review-comment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  margin-top: 10px;
+  padding-bottom: 10px;
+}
+
+.codex-review-comment-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+
+.codex-review-card {
+  padding: 10px;
+  border: 1px solid var(--background-modifier-border);
+  border-left: 3px solid #d39a00;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px color-mix(in srgb, #000 18%, transparent);
+  background: color-mix(in srgb, var(--background-primary) 96%, #000);
+  cursor: pointer;
+}
+
+.codex-review-card button,
+.codex-review-card a {
+  cursor: pointer;
+}
+
+.codex-review-card input,
+.codex-review-card textarea {
+  cursor: text;
+}
+
+.codex-review-card select,
+.codex-review-card .codex-review-comment-follow-up {
+  cursor: default;
+}
+
+.codex-review-card.is-draft {
+  border-left-color: #d39a00;
+}
+
+.codex-review-card.is-sent {
+  border-left-color: #3478c7;
+}
+
+.codex-review-card.is-addressed {
+  border-left-color: #29965a;
+}
+
+.codex-review-card.is-needs_attention {
+  border-left-color: #d34a4a;
+}
+
+.codex-review-card.is-needs_attention.is-attention-seen {
+  border-left-color: #29965a;
+}
+
+.codex-review-card.is-accepted {
+  border-left-color: #77808c;
+  opacity: 0.72;
+}
+
+.codex-review-card.is-resolved {
+  border-left-color: #77808c;
+}
+
+.codex-review-card.is-editor-target {
+  border-top-color: color-mix(in srgb, var(--interactive-accent) 66%, var(--background-modifier-border));
+  border-right-color: color-mix(in srgb, var(--interactive-accent) 66%, var(--background-modifier-border));
+  border-bottom-color: color-mix(in srgb, var(--interactive-accent) 66%, var(--background-modifier-border));
+  outline: 2px solid color-mix(in srgb, var(--interactive-accent) 72%, transparent);
+  outline-offset: 1px;
+}
+
+.codex-review-file {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.codex-review-card-actions {
+  flex: none;
+}
+
+.codex-review-card-actions .codex-review-icon-button {
+  width: 26px;
+  height: 26px;
+  min-width: 26px;
+  padding: 0;
+}
+
+.codex-review-card-actions .codex-review-icon-button.is-accept {
+  border-color: color-mix(in srgb, var(--color-green) 46%, var(--background-modifier-border));
+  background: color-mix(in srgb, var(--color-green) 13%, transparent);
+  color: var(--color-green);
+}
+
+.codex-review-card-actions .codex-review-icon-button.is-accept:hover {
+  background: color-mix(in srgb, var(--color-green) 22%, transparent);
+}
+
+.codex-review-card-actions .codex-review-icon-button.is-active,
+.codex-review-follow-up-skill.is-active {
+  border-color: color-mix(in srgb, var(--interactive-accent) 45%, var(--background-modifier-border));
+  background: color-mix(in srgb, var(--interactive-accent) 12%, transparent);
+  color: var(--interactive-accent);
+}
+
+.codex-review-card-actions .codex-review-icon-button.is-cancel,
+.codex-review-card-actions .codex-review-icon-button.is-delete {
+  border-color: color-mix(in srgb, var(--color-red) 46%, var(--background-modifier-border));
+  background: color-mix(in srgb, var(--color-red) 12%, transparent);
+  color: var(--color-red);
+}
+
+.codex-review-card-actions .codex-review-icon-button.is-cancel:hover,
+.codex-review-card-actions .codex-review-icon-button.is-delete:hover {
+  background: color-mix(in srgb, var(--color-red) 21%, transparent);
+}
+
+.codex-review-toolbar .codex-review-clear-file:hover:not(:disabled),
+.codex-review-toolbar .codex-review-clear-file:focus-visible {
+  border-color: color-mix(in srgb, var(--color-red) 42%, var(--background-modifier-border));
+  background: color-mix(in srgb, var(--color-red) 10%, transparent);
+  color: var(--color-red);
+}
+
+.codex-review-pending-highlight {
+  background-color: var(--text-highlight-bg, rgba(255, 208, 0, 0.35));
+  border-radius: 2px;
+}
+
+.codex-review-quote,
+.codex-review-modal-quote {
+  margin: 8px 0;
+  padding: 7px 9px;
+  border-left: 2px solid #d2a51d;
+  background: color-mix(in srgb, #f3c84b 24%, transparent);
+  color: var(--text-normal);
+  font-size: var(--font-ui-small);
+  cursor: pointer;
+}
+
+.codex-review-document-scope {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 8px 0;
+  padding: 7px 9px;
+  border-left: 2px solid var(--codex-review-accent);
+  background: var(--codex-review-accent-soft);
+  color: var(--text-normal);
+  font-size: var(--font-ui-small);
+  cursor: pointer;
+}
+
+.codex-review-document-scope svg {
+  width: 15px;
+  height: 15px;
+}
+
+.codex-review-status {
+  margin-top: 8px;
+  color: var(--text-faint);
+  font-size: var(--font-ui-smaller);
+}
+
+.codex-review-status.is-addressed {
+  color: var(--color-green);
+}
+
+.codex-review-status.is-needs_attention {
+  color: var(--text-error);
+}
+
+.codex-review-comment-message {
+  margin-top: 10px;
+  font-size: var(--font-ui-small);
+  line-height: 1.45;
+}
+
+.codex-review-comment-message + .codex-review-comment-message {
+  padding-top: 9px;
+  border-top: 1px solid var(--background-modifier-border);
+}
+
+.codex-review-comment-message.is-codex {
+  color: var(--text-muted);
+}
+
+.codex-review-comment-message-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 5px;
+  color: var(--text-normal);
+  font-size: var(--font-ui-smaller);
+  font-weight: var(--font-medium);
+}
+
+.codex-review-comment-message-label svg {
+  width: 14px;
+  height: 14px;
+}
+
+.codex-review-comment-message-time {
+  color: var(--text-faint);
+  font-size: var(--font-ui-smaller);
+  font-weight: var(--font-normal);
+  white-space: nowrap;
+}
+
+.codex-review-comment-message-actions {
+  display: flex;
+  flex: none;
+  gap: 2px;
+  margin-left: 2px;
+}
+
+.codex-review-comment-message-actions .codex-review-icon-button {
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  padding: 0;
+  border-color: transparent;
+  box-shadow: none;
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.codex-review-comment-message-actions .codex-review-icon-button svg {
+  width: 13px;
+  height: 13px;
+}
+
+.codex-review-comment-message-actions .codex-review-icon-button:hover {
+  border-color: var(--background-modifier-border);
+  background: var(--background-modifier-hover);
+  color: var(--text-normal);
+}
+
+.codex-review-comment-message-actions .codex-review-icon-button.is-delete:hover {
+  border-color: color-mix(in srgb, var(--color-red) 34%, transparent);
+  background: color-mix(in srgb, var(--color-red) 10%, transparent);
+  color: var(--color-red);
+}
+
+.codex-review-comment-draft-label {
+  margin-left: auto;
+  color: var(--text-muted);
+  font-weight: var(--font-normal);
+}
+
+.codex-review-comment-message-text {
+  overflow-wrap: anywhere;
+  cursor: text;
+  -webkit-user-select: text !important;
+  user-select: text !important;
+}
+
+.codex-review-comment-message-text * {
+  -webkit-user-select: text !important;
+  user-select: text !important;
+}
+
+.codex-review-comment-message-text.is-user {
+  white-space: pre-wrap;
+}
+
+.codex-review-comment-message-text.is-codex {
+  white-space: normal;
+}
+
+.codex-review-comment-message-text.is-codex > :first-child {
+  margin-top: 0;
+}
+
+.codex-review-comment-message-text.is-codex > :last-child {
+  margin-bottom: 0;
+}
+
+.codex-review-comment-message-text a {
+  cursor: pointer;
+  user-select: text;
+}
+
+.codex-review-comment-issue {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  margin-top: 9px;
+  padding: 8px 9px;
+  border: 1px solid color-mix(in srgb, var(--color-red) 30%, var(--background-modifier-border));
+  border-radius: 5px;
+  background: color-mix(in srgb, var(--color-red) 7%, transparent);
+  color: var(--text-normal);
+  font-size: var(--font-ui-smaller);
+  line-height: 1.4;
+}
+
+.codex-review-comment-issue.is-processing_failed,
+.codex-review-comment-issue.is-interrupted,
+.codex-review-comment-issue.is-conflicting_changes,
+.codex-review-comment-issue.is-missing_response {
+  border-color: color-mix(in srgb, var(--color-orange) 32%, var(--background-modifier-border));
+  background: color-mix(in srgb, var(--color-orange) 7%, transparent);
+}
+
+.codex-review-comment-issue > svg {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  margin-top: 2px;
+  color: var(--text-error);
+}
+
+.codex-review-comment-issue.is-processing_failed > svg,
+.codex-review-comment-issue.is-interrupted > svg,
+.codex-review-comment-issue.is-conflicting_changes > svg,
+.codex-review-comment-issue.is-missing_response > svg {
+  color: var(--color-orange);
+}
+
+.codex-review-comment-issue-text {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.codex-review-comment-issue-label {
+  margin-bottom: 2px;
+  font-weight: var(--font-medium);
+}
+
+.codex-review-skill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  max-width: 100%;
+  margin-top: 7px;
+  color: var(--interactive-accent);
+  font-size: var(--font-ui-smaller);
+}
+
+.codex-review-skill-badge svg {
+  width: 14px;
+  height: 14px;
+}
+
+.codex-review-comment-follow-up {
+  margin-top: 10px;
+  padding-top: 9px;
+  border-top: 1px solid var(--background-modifier-border);
+}
+
+.codex-review-comment-follow-up textarea {
+  width: 100%;
+  min-height: 68px;
+  resize: vertical;
+}
+
+.codex-review-comment-follow-up-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.codex-review-comment-reply-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 9px;
+  padding-top: 8px;
+  border-top: 1px solid var(--background-modifier-border);
+}
+
+.codex-review-comment-reply {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 28px;
+  padding: 4px 8px;
+  border: 1px solid transparent;
+  box-shadow: none;
+  background: transparent;
+  color: var(--interactive-accent);
+  font-size: var(--font-ui-smaller);
+}
+
+.codex-review-comment-reply:hover,
+.codex-review-comment-reply:focus-visible {
+  border-color: color-mix(in srgb, var(--interactive-accent) 36%, transparent);
+  background: color-mix(in srgb, var(--interactive-accent) 10%, transparent);
+  color: var(--interactive-accent);
+}
+
+.codex-review-cancel-follow-up {
+  min-height: 28px;
+  padding: 4px 8px;
+  border-color: transparent;
+  box-shadow: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+}
+
+.codex-review-save-follow-up {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
+  padding: 4px 12px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 999px;
+  box-shadow: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+  font-weight: var(--font-medium);
+}
+
+.codex-review-save-follow-up:hover:not(:disabled),
+.codex-review-save-follow-up:focus-visible {
+  border-color: color-mix(in srgb, var(--interactive-accent) 34%, transparent);
+  background: color-mix(in srgb, var(--interactive-accent) 10%, transparent);
+  color: var(--interactive-accent);
+}
+
+.codex-review-save-follow-up:disabled {
+  opacity: 0.45;
+}
+
+.codex-review-empty {
+  padding: 24px 8px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.codex-review-activity {
+  min-width: 0;
+}
+
+.codex-review-activity-heading,
+.codex-review-activity-status,
+.codex-review-activity-controls,
+.codex-review-stream-label,
+.codex-review-final-label,
+.codex-review-activity-error {
+  display: flex;
+  align-items: center;
+}
+
+.codex-review-activity-heading {
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 32px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.codex-review-activity-task {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--text-normal);
+  font-size: var(--font-ui-small);
+  font-weight: var(--font-medium);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.codex-review-activity-status {
+  flex: none;
+  gap: 5px;
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+}
+
+.codex-review-activity-status svg,
+.codex-review-stream-label svg,
+.codex-review-final-label svg,
+.codex-review-activity-error svg {
+  width: 15px;
+  height: 15px;
+}
+
+.codex-review-activity-status.is-running svg,
+.codex-review-activity-status.is-starting svg {
+  animation: codex-review-spin 1.1s linear infinite;
+}
+
+.codex-review-activity-status.is-completed {
+  color: var(--color-green);
+}
+
+.codex-review-activity-status.is-failed,
+.codex-review-activity-error {
+  color: var(--text-error);
+}
+
+.codex-review-activity-status.is-interrupted {
+  color: var(--text-muted);
+}
+
+.codex-review-activity-controls {
+  flex: none;
+  gap: 5px;
+}
+
+.codex-review-activity-controls .codex-review-icon-button {
+  width: 26px;
+  height: 26px;
+  min-width: 26px;
+}
+
+.codex-review-stream {
+  display: flex;
+  flex-direction: column;
+}
+
+.codex-review-stream-entry {
+  padding: 11px 2px;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.codex-review-stream-label,
+.codex-review-final-label {
+  gap: 6px;
+  margin-bottom: 6px;
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+  font-weight: var(--font-medium);
+}
+
+.codex-review-stream-entry.is-reasoning .codex-review-stream-label {
+  color: var(--codex-review-accent);
+}
+
+.codex-review-stream-text {
+  overflow-wrap: anywhere;
+  color: var(--text-normal);
+  font-size: var(--font-ui-small);
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.codex-review-final {
+  padding: 13px 2px 4px;
+}
+
+.codex-review-final-label {
+  color: var(--text-normal);
+}
+
+.codex-review-final-content {
+  overflow-wrap: anywhere;
+  font-size: var(--font-ui-small);
+  line-height: 1.5;
+}
+
+.codex-review-final-content.is-streaming {
+  white-space: pre-wrap;
+}
+
+.codex-review-final-content > :first-child {
+  margin-top: 0;
+}
+
+.codex-review-final-content > :last-child {
+  margin-bottom: 0;
+}
+
+.codex-review-activity-error {
+  align-items: flex-start;
+  gap: 7px;
+  margin-top: 12px;
+  padding: 9px 0;
+  font-size: var(--font-ui-small);
+  line-height: 1.4;
+}
+
+@keyframes codex-review-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.codex-review-highlight {
+  border-radius: 2px;
+  background: color-mix(in srgb, #f3c84b 42%, transparent);
+  box-shadow: inset 0 -1px 0 color-mix(in srgb, #9b7407 48%, transparent);
+  cursor: text;
+}
+
+.codex-review-highlight.is-sent {
+  background: color-mix(in srgb, var(--interactive-accent) 20%, transparent);
+  box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--interactive-accent) 54%, transparent);
+}
+
+.codex-review-highlight.is-needs_attention {
+  background: color-mix(in srgb, var(--color-red) 16%, transparent);
+  box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--color-red) 48%, transparent);
+}
+
+.codex-review-highlight.is-active,
+.codex-review-pending-highlight.is-active,
+.codex-review-inline-new.is-active {
+  outline: 0;
+  background: color-mix(in srgb, #f3c84b 64%, transparent);
+  box-shadow: inset 0 -1px 0 color-mix(in srgb, #9b7407 68%, transparent);
+}
+
+.codex-review-inline-new.is-active {
+  box-shadow: inset 0 -2px 0 color-mix(in srgb, var(--color-green) 72%, transparent);
+}
+
+.theme-dark :is(
+  .codex-review-highlight.is-active,
+  .codex-review-pending-highlight.is-active,
+  .codex-review-inline-new.is-active
+) {
+  background: color-mix(in srgb, #f3c84b 34%, transparent);
+  box-shadow: inset 0 -1px 0 color-mix(in srgb, #c89b12 48%, transparent);
+}
+
+.theme-dark .codex-review-inline-new.is-active {
+  box-shadow: inset 0 -2px 0 color-mix(in srgb, var(--color-green) 72%, transparent);
+}
+
+.codex-review-point-anchor {
+  display: inline-block;
+  width: 3px;
+  height: 1em;
+  margin: 0 1px;
+  border-radius: 2px;
+  vertical-align: -0.15em;
+  background: #f3c84b;
+}
+
+.codex-review-point-anchor.is-sent {
+  background: var(--interactive-accent);
+}
+
+.codex-review-point-anchor.is-needs_attention {
+  background: var(--color-red);
+}
+
+.codex-review-inline-comparison {
+  display: inline;
+  margin: 0 0.25em 0 0;
+  overflow: visible;
+  border: 0;
+  border-radius: 2px;
+  background: transparent;
+  box-shadow: none;
+  font-family: var(--font-text);
+  font-size: inherit;
+  line-height: inherit;
+  white-space: pre-wrap;
+  cursor: text;
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+.codex-review-inline-comparison:focus,
+.codex-review-inline-value:focus {
+  outline: none;
+}
+
+.codex-review-inline-row {
+  display: inline;
+}
+
+.codex-review-inline-value {
+  display: inline;
+  padding: 0 0.08em;
+  overflow-wrap: anywhere;
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+.codex-review-inline-row.is-old,
+.codex-review-inline-row.is-old:hover,
+.codex-review-inline-row.is-old:focus-within {
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--color-red) 10%, transparent);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.codex-review-inline-row.is-old .codex-review-inline-value {
+  color: var(--color-red);
+  text-decoration: line-through;
+  text-decoration-color: color-mix(in srgb, var(--color-red) 65%, transparent);
+}
+
+.codex-review-inline-new {
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--color-green) 18%, transparent);
+  box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--color-green) 58%, transparent);
+  cursor: text;
+}
+
+.codex-review-comment-input,
+.codex-review-thread-search {
+  width: 100%;
+}
+
+.codex-review-comment-input {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.codex-review-skill-mention-host {
+  position: relative;
+}
+
+.codex-review-skill-trigger {
+  position: absolute;
+  z-index: 2;
+  bottom: 7px;
+  left: 7px;
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  padding: 0;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 50%;
+  box-shadow: none;
+  background: transparent;
+  color: var(--background-modifier-border);
+}
+
+.codex-review-skill-trigger svg {
+  width: 10px;
+  height: 10px;
+}
+
+.codex-review-skill-trigger:hover {
+  border-color: var(--text-faint);
+  background: var(--background-modifier-hover);
+  color: var(--text-muted);
+}
+
+.codex-review-skill-mention-host textarea {
+  padding-bottom: 29px;
+}
+
+/* Keep the document readable while the comment rail recedes beyond narrow editor panes. */
+.codex-review-editor-surface.is-codex-review-preview > .codex-review-editor-toolbar,
+.codex-review-editor-surface.is-codex-review-preview > .codex-review-margin-rail {
+  display: none !important;
+}
+
+.codex-review-editor-surface.has-codex-review-file {
+  --codex-review-accent: var(--interactive-accent);
+  --codex-review-accent-hover: color-mix(in srgb, var(--interactive-accent) 82%, var(--text-normal));
+  --codex-review-accent-soft: color-mix(in srgb, var(--codex-review-accent) 18%, transparent);
+  --codex-review-rail-width: 292px;
+  --codex-review-rail-peek: 44px;
+  --codex-review-editor-min-width: clamp(270px, calc(100% - var(--codex-review-rail-peek)), 700px);
+  display: grid !important;
+  grid-template-columns: minmax(var(--codex-review-editor-min-width), 1fr) var(--codex-review-rail-width);
+  grid-template-rows: auto minmax(0, 1fr);
+  position: relative;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scrollbar-color: var(--scrollbar-thumb-bg) transparent;
+  scrollbar-width: thin;
+  container-type: inline-size;
+}
+
+.codex-review-editor-surface.has-codex-review-file > .codex-review-editor-toolbar {
+  grid-column: 1 / -1;
+  grid-row: 1;
+}
+
+.codex-review-editor-surface.has-codex-review-file > .cm-editor {
+  grid-column: 1;
+  grid-row: 2;
+  width: auto;
+  min-width: 0;
+  min-height: 0;
+}
+
+.codex-review-editor-toolbar {
+  position: sticky;
+  left: 0;
+  z-index: 8;
+  display: flex;
+  align-items: stretch;
+  width: 100cqw;
+  max-width: 100cqw;
+  min-width: 0;
+  min-height: 41px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--background-modifier-border);
+  background: var(--background-primary);
+  box-sizing: border-box;
+}
+
+.codex-review-editor-toolbar-main {
+  display: flex;
+  flex: 1 1 auto;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  min-height: 41px;
+  padding: 5px 7px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.codex-review-editor-identity,
+.codex-review-editor-quick-actions,
+.codex-review-editor-destinations,
+.codex-review-editor-target {
+  display: flex;
+  align-items: center;
+}
+
+.codex-review-editor-provider {
+  flex: 0 0 78px;
+  width: 78px;
+  min-width: 0;
+  min-height: 30px;
+  padding: 3px 6px;
+  overflow: hidden;
+  border-color: var(--background-modifier-border);
+  border-radius: 5px;
+  background: transparent;
+  color: var(--text-normal);
+  text-overflow: ellipsis;
+}
+
+.codex-review-editor-identity {
+  flex: none;
+  gap: 6px;
+  color: var(--text-normal);
+  font-size: var(--font-ui-small);
+  font-weight: var(--font-semibold);
+  white-space: nowrap;
+}
+
+.codex-review-editor-identity > svg {
+  width: 17px;
+  height: 17px;
+  color: var(--interactive-accent);
+}
+
+.codex-review-editor-quick-actions,
+.codex-review-editor-destinations {
+  flex: none;
+  gap: 2px;
+}
+
+.codex-review-editor-toolbar .codex-review-icon-button {
+  width: 29px;
+  height: 29px;
+  min-width: 29px;
+  padding: 0;
+  border-color: transparent;
+  box-shadow: none;
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.codex-review-editor-toolbar .codex-review-icon-button:hover,
+.codex-review-editor-toolbar .codex-review-icon-button:focus-visible {
+  border-color: var(--background-modifier-border);
+  background: var(--background-modifier-hover);
+  color: var(--text-normal);
+}
+
+.codex-review-editor-toolbar .codex-review-icon-button.is-configured {
+  color: var(--interactive-accent);
+}
+
+.codex-review-editor-toolbar .codex-review-icon-button.is-active {
+  border-color: color-mix(in srgb, var(--interactive-accent) 42%, var(--background-modifier-border));
+  background: color-mix(in srgb, var(--interactive-accent) 12%, transparent);
+  color: var(--interactive-accent);
+}
+
+.codex-review-editor-target {
+  flex: 1 1 170px;
+  gap: 6px;
+  min-width: 80px;
+  max-width: 280px;
+  min-height: 30px;
+  padding: 4px 8px;
+  overflow: hidden;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 5px;
+  box-shadow: none;
+  background: transparent;
+  color: var(--text-muted);
+  text-align: left;
+}
+
+.codex-review-editor-target.is-unselected {
+  border-color: var(--color-blue);
+  background: color-mix(in srgb, var(--color-blue) 12%, transparent);
+  color: var(--color-blue);
+}
+
+.codex-review-editor-target > svg {
+  width: 15px;
+  height: 15px;
+  flex: none;
+}
+
+.codex-review-editor-target > span:last-child {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.codex-review-editor-model {
+  flex: 0 1 132px;
+  width: 132px;
+  min-width: 82px;
+  max-width: 132px;
+  min-height: 30px;
+  padding: 3px 7px;
+  overflow: hidden;
+  border-color: var(--background-modifier-border);
+  border-radius: 5px;
+  background: transparent;
+  color: var(--text-muted);
+  text-overflow: ellipsis;
+}
+
+.codex-review-editor-status {
+  display: flex;
+  flex: none;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 3px;
+  width: auto;
+  min-width: 0;
+  max-width: none;
+  min-height: 35px;
+  margin: 3px 6px 3px 0;
+  padding: 2px;
+  overflow: visible;
+  border: 1px solid color-mix(in srgb, var(--interactive-accent) 34%, var(--background-modifier-border));
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--interactive-accent) 7%, var(--background-secondary));
+  box-shadow: 0 1px 3px rgb(0 0 0 / 10%);
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+  line-height: 1.3;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.codex-review-editor-status-item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 29px;
+  height: 29px;
+  min-width: 29px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 5px;
+  box-shadow: none;
+  background: var(--background-primary);
+  color: var(--text-muted);
+}
+
+button.codex-review-editor-status-item:hover,
+button.codex-review-editor-status-item:focus-visible {
+  border-color: var(--background-modifier-border);
+  background: var(--background-modifier-hover);
+}
+
+.codex-review-editor-status-icon,
+.codex-review-editor-status-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.codex-review-editor-status-count {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 15px;
+  height: 15px;
+  padding: 0 3px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 999px;
+  background: var(--background-primary);
+  color: inherit;
+  font-size: 9px;
+  font-weight: var(--font-medium);
+  line-height: 1;
+  box-sizing: border-box;
+}
+
+.codex-review-editor-status .is-ready {
+  border-color: color-mix(in srgb, var(--interactive-accent) 55%, var(--background-modifier-border));
+  background: color-mix(in srgb, var(--interactive-accent) 16%, var(--background-primary));
+  color: var(--interactive-accent);
+}
+
+.codex-review-editor-status .is-attention {
+  border-color: color-mix(in srgb, var(--text-warning) 58%, var(--background-modifier-border));
+  background: color-mix(in srgb, var(--text-warning) 17%, var(--background-primary));
+  color: var(--text-warning);
+}
+
+.codex-review-editor-status .is-complete {
+  border-color: color-mix(in srgb, var(--text-success) 42%, var(--background-modifier-border));
+  background: color-mix(in srgb, var(--text-success) 11%, var(--background-primary));
+  color: var(--text-success);
+}
+
+.codex-review-editor-status .is-ready .codex-review-editor-status-count {
+  border-color: color-mix(in srgb, var(--interactive-accent) 38%, var(--background-modifier-border));
+  background: var(--background-primary);
+  color: color-mix(in srgb, var(--interactive-accent) 72%, var(--text-muted));
+}
+
+.codex-review-editor-status .is-attention .codex-review-editor-status-count {
+  border-color: color-mix(in srgb, var(--text-warning) 42%, var(--background-modifier-border));
+  background: var(--background-primary);
+  color: color-mix(in srgb, var(--text-warning) 72%, var(--text-muted));
+}
+
+.codex-review-editor-status .is-processing {
+  border-color: color-mix(in srgb, var(--interactive-accent) 50%, var(--background-modifier-border));
+  background: color-mix(in srgb, var(--interactive-accent) 11%, var(--background-primary));
+  color: var(--interactive-accent);
+}
+
+.codex-review-editor-status .is-processing svg {
+  overflow: visible;
+}
+
+.codex-review-editor-status .is-processing svg > :last-child {
+  transform-box: view-box;
+  transform-origin: 12px 12px;
+  animation: codex-review-clock-hand 1.8s linear infinite;
+}
+
+@keyframes codex-review-clock-hand {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .codex-review-editor-status .is-processing svg > :last-child {
+    animation: none;
+  }
+}
+
+.codex-review-editor-status .codex-review-accept-all {
+  width: 29px;
+  height: 29px;
+  min-width: 29px;
+  padding: 0;
+  border-color: var(--background-modifier-border);
+  background: var(--background-primary);
+  color: var(--text-muted);
+}
+
+.codex-review-editor-status .codex-review-accept-all:hover,
+.codex-review-editor-status .codex-review-accept-all:focus-visible {
+  border-color: var(--background-modifier-border-hover);
+  background: var(--background-modifier-hover);
+  color: var(--text-normal);
+}
+
+.codex-review-margin-rail {
+  position: relative;
+  grid-column: 2;
+  grid-row: 2;
+  width: var(--codex-review-rail-width);
+  min-width: var(--codex-review-rail-width);
+  min-height: 0;
+  overflow: hidden;
+  border-left: 0;
+  background: var(--background-primary);
+}
+
+.codex-review-margin-canvas {
+  position: absolute;
+  inset: 0;
+  min-width: 0;
+  min-height: 0;
+  overflow: visible;
+  will-change: transform;
+}
+
+.codex-review-margin-footer {
+  position: sticky;
+  right: 8px;
+  bottom: 12px;
+  z-index: 6;
+  grid-column: 2;
+  grid-row: 2;
+  align-self: end;
+  justify-self: end;
+  width: auto;
+  margin: 0 8px 32px 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+.codex-review-editor-surface.has-codex-review-file > .cm-editor .cm-scroller {
+  scrollbar-color: transparent transparent;
+}
+
+.codex-review-editor-surface.has-codex-review-file > .cm-editor .cm-scroller::-webkit-scrollbar-thumb:vertical,
+.codex-review-editor-surface.has-codex-review-file > .cm-editor .cm-scroller::-webkit-scrollbar-track:vertical,
+.codex-review-editor-surface.has-codex-review-file > .cm-editor .cm-scroller::-webkit-scrollbar-corner {
+  border-color: transparent !important;
+  background: transparent !important;
+}
+
+.codex-review-editor-scrollbar {
+  position: fixed;
+  z-index: 15;
+  width: 8px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: default;
+  touch-action: none;
+}
+
+.codex-review-editor-scrollbar.is-hidden {
+  display: none;
+}
+
+.codex-review-editor-scrollbar-thumb {
+  position: absolute;
+  top: 0;
+  right: 1px;
+  width: 5px;
+  min-height: 28px;
+  border-radius: 3px;
+  background: var(--scrollbar-thumb-bg);
+  opacity: 0.72;
+  transition: width 100ms ease, opacity 100ms ease, background-color 100ms ease;
+  will-change: transform;
+}
+
+.codex-review-editor-scrollbar:hover .codex-review-editor-scrollbar-thumb,
+.codex-review-editor-scrollbar:focus-visible .codex-review-editor-scrollbar-thumb,
+.codex-review-editor-scrollbar.is-dragging .codex-review-editor-scrollbar-thumb {
+  width: 6px;
+  background: var(--scrollbar-active-thumb-bg, var(--scrollbar-thumb-bg));
+  opacity: 1;
+}
+
+.codex-review-selection-action {
+  position: absolute;
+  z-index: 9;
+  display: inline-flex;
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 50%;
+  background: var(--background-primary);
+  box-shadow: var(--shadow-s);
+  color: var(--text-muted);
+}
+
+.codex-review-selection-action:hover {
+  border-color: var(--interactive-accent);
+  color: var(--interactive-accent);
+}
+
+.codex-review-selection-action svg {
+  width: 13px;
+  height: 13px;
+}
+
+.codex-review-selection-action.is-hidden {
+  display: none;
+}
+
+button.codex-review-margin-send {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--interactive-accent) 76%, white);
+  border-radius: 50% !important;
+  outline: 0;
+  appearance: none;
+  background: var(--codex-review-accent, #3b82f6) !important;
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--interactive-accent) 18%, transparent),
+    0 9px 24px color-mix(in srgb, var(--interactive-accent) 38%, transparent),
+    0 2px 5px rgb(0 0 0 / 18%);
+  color: #fff !important;
+  letter-spacing: 0;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  animation: codex-review-send-appear 180ms ease-out;
+  transition:
+    transform 120ms ease,
+    box-shadow 120ms ease,
+    filter 120ms ease;
+}
+
+button.codex-review-margin-send:hover:not(:disabled),
+button.codex-review-margin-send:focus-visible {
+  border-color: color-mix(in srgb, var(--interactive-accent) 78%, white);
+  background: var(--codex-review-accent-hover, #2f6fdd) !important;
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--interactive-accent) 22%, transparent),
+    0 11px 28px color-mix(in srgb, var(--interactive-accent) 46%, transparent),
+    0 3px 7px rgb(0 0 0 / 20%);
+  color: #fff !important;
+  filter: saturate(1.08) brightness(1.04);
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+button.codex-review-margin-send:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--interactive-accent) 42%, var(--background-primary));
+  outline-offset: 2px;
+}
+
+button.codex-review-margin-send:active:not(:disabled) {
+  border-color: var(--interactive-accent);
+  background: color-mix(in srgb, var(--codex-review-accent, #3b82f6) 78%, #000) !important;
+  box-shadow:
+    0 0 0 2px color-mix(in srgb, var(--interactive-accent) 16%, transparent),
+    0 4px 12px color-mix(in srgb, var(--interactive-accent) 36%, transparent),
+    0 1px 3px rgb(0 0 0 / 20%);
+  color: #fff !important;
+  opacity: 1;
+  transform: translateY(1px);
+}
+
+button.codex-review-margin-send:disabled {
+  border-color: color-mix(in srgb, var(--interactive-accent) 42%, transparent);
+  outline-color: transparent;
+  background: var(--codex-review-accent, #3b82f6) !important;
+  box-shadow: none;
+  color: #fff !important;
+  opacity: 0.64;
+  transform: none;
+}
+
+.codex-review-margin-send-icon,
+.codex-review-margin-send-icon svg {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  stroke-width: 2;
+}
+
+.codex-review-margin-send-count {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 21px;
+  height: 21px;
+  padding: 0 5px;
+  border: 2px solid var(--interactive-accent);
+  border-radius: 999px;
+  background: var(--background-primary);
+  box-shadow: 0 2px 5px rgb(0 0 0 / 18%);
+  color: var(--interactive-accent);
+  font-size: var(--font-ui-smaller);
+  font-weight: var(--font-semibold);
+  line-height: 1;
+  box-sizing: border-box;
+}
+
+@keyframes codex-review-send-appear {
+  from {
+    opacity: 0;
+    transform: translateY(7px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  button.codex-review-margin-send,
+  .codex-review-margin-card {
+    animation: none;
+    transition: none;
+  }
+}
+
+.codex-review-margin-card {
+  position: absolute;
+  right: 8px;
+  left: 8px;
+  width: auto;
+  margin: 0;
+  padding: 10px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  box-sizing: border-box;
+  border-color: color-mix(in srgb, var(--background-modifier-border) 72%, transparent);
+  background: var(--background-secondary);
+  box-shadow: 0 1px 3px color-mix(in srgb, #000 12%, transparent);
+  will-change: top, transform;
+  transition:
+    top 180ms cubic-bezier(0.2, 0, 0, 1),
+    opacity 90ms ease,
+    background-color 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.codex-review-margin-card.is-editor-target {
+  z-index: 4;
+  overflow: visible;
+  border-color: var(--background-modifier-border);
+  border-left-width: 3px;
+  border-left-color: #d39a00;
+  outline: 0;
+  background: var(--background-primary);
+  box-shadow: 0 3px 10px color-mix(in srgb, #000 22%, transparent);
+}
+
+.codex-review-margin-card.is-draft.is-editor-target {
+  border-left-color: #d39a00;
+}
+
+.codex-review-margin-card.is-sent.is-editor-target {
+  border-left-color: #3478c7;
+}
+
+.codex-review-margin-card.is-addressed.is-editor-target {
+  border-left-color: #29965a;
+}
+
+.codex-review-margin-card.is-needs_attention.is-editor-target {
+  border-left-color: #d34a4a;
+}
+
+.codex-review-margin-card.is-needs_attention.is-attention-seen.is-editor-target {
+  border-left-color: #29965a;
+}
+
+.codex-review-margin-card.is-accepted.is-editor-target {
+  border-left-color: #77808c;
+}
+
+.codex-review-margin-card.is-resolved.is-editor-target {
+  border-left-color: #77808c;
+}
+
+.codex-review-margin-card.is-outside-viewport {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.codex-review-margin-render-error {
+  margin: 8px;
+  padding: 9px;
+  border: 1px solid color-mix(in srgb, var(--color-red) 38%, var(--background-modifier-border));
+  border-radius: 5px;
+  background: color-mix(in srgb, var(--color-red) 8%, var(--background-primary));
+  color: var(--text-error);
+  font-size: var(--font-ui-smaller);
+}
+
+.codex-review-margin-card-top {
+  display: flex;
+  min-height: 26px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+
+.codex-review-margin-card-meta {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 6px;
+}
+
+.codex-review-margin-card-top time {
+  color: var(--text-faint);
+  font-size: var(--font-ui-smaller);
+}
+
+.codex-review-margin-card .codex-review-comment-message {
+  font-size: var(--font-ui-smaller);
+}
+
+.codex-review-margin-card .codex-review-comment-message:first-of-type {
+  margin-top: 4px;
+}
+
+.codex-review-margin-card .codex-review-comment-message-text {
+  line-height: 1.4;
+}
+
+.codex-review-margin-card.is-collapsed {
+  padding: 8px 10px;
+  overflow: hidden;
+  background: var(--background-secondary);
+  box-shadow: 0 1px 2px color-mix(in srgb, #000 10%, transparent);
+}
+
+.codex-review-margin-card.is-collapsed:hover {
+  border-top-color: var(--background-modifier-border-hover);
+  border-right-color: var(--background-modifier-border-hover);
+  border-bottom-color: var(--background-modifier-border-hover);
+  background: var(--background-secondary-alt);
+  box-shadow: 0 2px 5px color-mix(in srgb, #000 14%, transparent);
+}
+
+.codex-review-margin-card:focus-visible {
+  outline: 2px solid var(--interactive-accent);
+  outline-offset: 1px;
+}
+
+.codex-review-margin-card.is-collapsed .codex-review-margin-card-top {
+  min-height: 18px;
+  margin-bottom: 0;
+}
+
+.codex-review-margin-card.is-collapsed .codex-review-comment-message-actions,
+.codex-review-margin-card.is-collapsed .codex-review-comment-issue,
+.codex-review-margin-card.is-collapsed .codex-review-comment-follow-up,
+.codex-review-margin-card.is-collapsed .codex-review-comment-reply-row,
+.codex-review-margin-card.is-collapsed .codex-review-status {
+  display: none;
+}
+
+.codex-review-margin-card.is-collapsed .codex-review-card-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.codex-review-margin-card.is-collapsed .codex-review-card-actions .codex-review-icon-button {
+  display: none;
+}
+
+.codex-review-margin-card.is-collapsed .codex-review-card-actions .codex-review-icon-button.is-accept,
+.codex-review-margin-card.is-collapsed .codex-review-card-actions .codex-review-icon-button.is-cancel,
+.codex-review-margin-card.is-collapsed .codex-review-card-actions .codex-review-icon-button.is-resolve {
+  display: inline-flex;
+  border-color: #d1d1d1;
+  background: #eeeeee;
+  color: #1f1f1f;
+}
+
+.codex-review-margin-card.is-collapsed .codex-review-card-actions .codex-review-icon-button.is-accept:hover,
+.codex-review-margin-card.is-collapsed .codex-review-card-actions .codex-review-icon-button.is-accept:focus-visible,
+.codex-review-margin-card.is-collapsed .codex-review-card-actions .codex-review-icon-button.is-cancel:hover,
+.codex-review-margin-card.is-collapsed .codex-review-card-actions .codex-review-icon-button.is-cancel:focus-visible,
+.codex-review-margin-card.is-collapsed .codex-review-card-actions .codex-review-icon-button.is-resolve:hover,
+.codex-review-margin-card.is-collapsed .codex-review-card-actions .codex-review-icon-button.is-resolve:focus-visible {
+  border-color: #b8b8b8;
+  background: #dddddd;
+  color: #111111;
+}
+
+.codex-review-margin-card.is-collapsed .codex-review-thread-message {
+  display: none;
+}
+
+.codex-review-margin-card.is-collapsed .codex-review-thread-message.is-compact-visible {
+  display: block;
+  margin-top: 3px;
+}
+
+.codex-review-margin-card.is-collapsed .codex-review-comment-message-label {
+  margin-bottom: 3px;
+  color: var(--text-muted);
+}
+
+.codex-review-margin-card.is-collapsed .codex-review-thread-message .codex-review-comment-message-text {
+  display: -webkit-box;
+  max-height: 4.2em;
+  overflow: hidden;
+  color: var(--text-muted);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.codex-review-comment-message-expand,
+.codex-review-comment-thread-toggle-row {
+  display: none;
+}
+
+.codex-review-margin-card.is-collapsed .codex-review-comment-message-expand:not(.is-hidden) {
+  display: inline-flex;
+  margin: 4px 0 0;
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+  color: var(--interactive-accent);
+  font-size: var(--font-ui-smaller);
+  font-weight: var(--font-medium);
+}
+
+.codex-review-margin-card.is-collapsed .codex-review-comment-message-expand:hover,
+.codex-review-margin-card.is-collapsed .codex-review-comment-message-expand:focus-visible {
+  color: var(--interactive-accent-hover);
+  text-decoration: underline;
+}
+
+.codex-review-margin-card.is-collapsed .codex-review-comment-thread-toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 9px;
+}
+
+.codex-review-margin-card.is-collapsed .codex-review-comment-thread-toggle-row::before,
+.codex-review-margin-card.is-collapsed .codex-review-comment-thread-toggle-row::after {
+  height: 1px;
+  flex: 1 1 auto;
+  background: var(--background-modifier-border);
+  content: "";
+}
+
+.codex-review-comment-thread-toggle {
+  flex: none;
+  min-height: 24px;
+  margin: 0;
+  padding: 0 3px;
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+  color: var(--interactive-accent);
+  font-size: var(--font-ui-small);
+  font-weight: var(--font-medium);
+}
+
+.codex-review-comment-thread-toggle:hover,
+.codex-review-comment-thread-toggle:focus-visible {
+  color: var(--interactive-accent-hover);
+  text-decoration: underline;
+}
+
+.codex-review-margin-card .codex-review-comment-follow-up textarea {
+  min-height: 72px;
+}
+
+.codex-review-margin-card.is-composer {
+  overflow: visible;
+  border-top-color: color-mix(in srgb, var(--interactive-accent) 35%, var(--background-modifier-border));
+  border-right-color: color-mix(in srgb, var(--interactive-accent) 35%, var(--background-modifier-border));
+  border-bottom-color: color-mix(in srgb, var(--interactive-accent) 35%, var(--background-modifier-border));
+}
+
+.codex-review-margin-card.is-composer.is-editor-target {
+  border-color: var(--background-modifier-border);
+  border-left-color: #d39a00;
+}
+
+.codex-review-new-comment-label {
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+  font-weight: var(--font-medium);
+}
+
+.codex-review-inline-comment-input textarea {
+  width: 100%;
+  min-height: 92px;
+  resize: vertical;
+}
+
+.codex-review-inline-comment-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 6px;
+}
+
+.codex-review-inline-comment-actions button {
+  min-height: 28px;
+  padding: 3px 11px;
+  font-size: var(--font-ui-smaller);
+}
+
+@media (max-width: 980px) {
+  .codex-review-editor-toolbar-main {
+    gap: 4px;
+  }
+}
+
+@media (max-width: 700px) {
+  .codex-review-editor-toolbar-main {
+    padding: 5px 6px;
+  }
+}
+
+@container (max-width: 720px) {
+  .codex-review-editor-identity > span:nth-child(2) {
+    display: none;
+  }
+
+  .codex-review-editor-toolbar .codex-review-icon-button {
+    width: 27px;
+    height: 27px;
+    min-width: 27px;
+  }
+
+  .codex-review-editor-target {
+    min-width: 68px;
+    padding-right: 6px;
+    padding-left: 6px;
+  }
+
+  .codex-review-editor-model {
+    flex-basis: 94px;
+    width: 94px;
+    min-width: 76px;
+  }
+
+  .codex-review-editor-status { padding-right: 5px; }
+}
+
+@container (max-width: 560px) {
+  .codex-review-editor-identity {
+    display: none;
+  }
+
+  .codex-review-editor-toolbar-main {
+    gap: 3px;
+    padding-right: 4px;
+    padding-left: 4px;
+  }
+
+  .codex-review-editor-toolbar .codex-review-icon-button {
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+  }
+
+  .codex-review-editor-quick-actions,
+  .codex-review-editor-destinations {
+    gap: 1px;
+  }
+
+  .codex-review-editor-target {
+    min-width: 58px;
+  }
+
+  .codex-review-editor-model {
+    flex-basis: 82px;
+    width: 82px;
+    min-width: 70px;
+    padding-right: 4px;
+    padding-left: 4px;
+  }
+
+  .codex-review-editor-status { padding-right: 4px; }
+}
+
+.codex-review-skill-mentions {
+  position: fixed;
+  z-index: 10000;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 4px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--background-primary) 92%, transparent);
+  box-shadow: 0 10px 24px rgb(0 0 0 / 16%);
+  backdrop-filter: blur(8px);
+}
+
+.codex-review-skill-mention {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 7px 9px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-normal);
+  font-size: var(--font-ui-small);
+  opacity: 0.75;
+  text-align: left;
+}
+
+.codex-review-skill-mention:hover,
+.codex-review-skill-mention.is-active {
+  background: var(--background-modifier-hover);
+  opacity: 1;
+}
+
+.codex-review-skill-mention svg {
+  width: 16px;
+  height: 16px;
+  flex: none;
+  margin-top: 2px;
+}
+
+.codex-review-skill-mention-text {
+  display: grid;
+  min-width: 0;
+  flex: 1 1 auto;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr) auto;
+  column-gap: 12px;
+  row-gap: 3px;
+}
+
+.codex-review-skill-mention-name {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--text-normal);
+  font-weight: var(--font-medium);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.codex-review-skill-mention-description {
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--text-muted);
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.codex-review-skill-mention-scope {
+  grid-column: 3;
+  grid-row: 1;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.codex-review-modal-actions {
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+
+.codex-review-claude-path {
+  padding: 8px 10px;
+  overflow-wrap: anywhere;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 5px;
+  background: var(--background-secondary);
+  color: var(--text-muted);
+}
+
+.codex-review-instructions-dialog {
+  width: min(680px, calc(100vw - 48px));
+  max-width: 680px;
+}
+
+.codex-review-instructions-modal {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+.codex-review-instruction-form {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  margin-top: 14px;
+  box-sizing: border-box;
+}
+
+.codex-review-instruction-scope-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin-bottom: 12px;
+}
+
+.codex-review-instruction-scope-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  color: var(--text-normal);
+  font-size: var(--font-ui-small);
+  cursor: pointer;
+}
+
+.codex-review-instruction-scope-option input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: var(--interactive-accent);
+}
+
+.codex-review-instruction-target {
+  margin-bottom: 6px;
+  overflow: hidden;
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.codex-review-instruction-text {
+  display: block;
+  width: 100%;
+  min-height: 220px;
+  resize: vertical;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+
+.codex-review-instruction-reuse-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 0 8px;
+}
+
+.codex-review-instruction-reuse-actions .codex-review-instruction-add {
+  max-width: 100%;
+  min-width: 0;
+  margin-top: 0;
+}
+
+.codex-review-instruction-sources {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 8px;
+  min-width: 0;
+}
+
+.codex-review-instruction-source {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  padding: 4px 4px 4px 8px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 5px;
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+}
+
+.codex-review-instruction-source > span:first-child,
+.codex-review-instruction-source > span:first-child svg {
+  width: 14px;
+  height: 14px;
+  flex: none;
+}
+
+.codex-review-instruction-source-name {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.codex-review-instruction-source .codex-review-icon-button {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+.codex-review-instruction-add {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 30px;
+  margin-top: 8px;
+  padding: 5px 9px;
+  border-color: var(--background-modifier-border);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+}
+
+.codex-review-instruction-add-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  max-width: 100%;
+  margin-top: 8px;
+}
+
+.codex-review-instruction-add-actions .codex-review-instruction-add {
+  max-width: 100%;
+  min-width: 0;
+  margin-top: 0;
+  box-sizing: border-box;
+}
+
+.codex-review-instruction-add svg {
+  width: 14px;
+  height: 14px;
+}
+
+.codex-review-instruction-link-dialog {
+  width: min(520px, calc(100vw - 48px));
+  max-width: 520px;
+}
+
+.codex-review-instruction-link-input {
+  width: 100%;
+  min-width: 0;
+  margin-top: 10px;
+  box-sizing: border-box;
+}
+
+.codex-review-busy-modal p,
+.codex-review-restore-modal p,
+.codex-review-clear-modal p {
+  max-width: 560px;
+  color: var(--text-normal);
+  line-height: 1.55;
+}
+
+.codex-review-busy-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.codex-review-labeled-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 34px;
+}
+
+.codex-review-clear-confirm {
+  border-color: color-mix(in srgb, var(--color-red) 62%, var(--background-modifier-border));
+  background: var(--color-red);
+  color: var(--text-on-accent);
+}
+
+.codex-review-clear-confirm:hover:not(:disabled),
+.codex-review-clear-confirm:focus-visible {
+  border-color: var(--color-red);
+  background: color-mix(in srgb, var(--color-red) 86%, #000);
+  color: var(--text-on-accent);
+}
+
+.codex-review-labeled-button svg {
+  width: 16px;
+  height: 16px;
+}
+
+.codex-review-thread-search {
+  margin: 10px 0;
+}
+
+.codex-review-thread-list {
+  display: flex;
+  flex-direction: column;
+  max-height: min(60vh, 520px);
+  overflow-y: auto;
+}
+
+.codex-review-picker-search {
+  width: 100%;
+  margin: 10px 0;
+}
+
+.codex-review-picker-list {
+  display: flex;
+  flex-direction: column;
+  max-height: min(62vh, 560px);
+  overflow-y: auto;
+}
+
+.codex-review-picker-row {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 52px;
+  padding: 7px 9px;
+  border: 0;
+  border-bottom: 1px solid var(--background-modifier-border);
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  text-align: left;
+}
+
+.codex-review-picker-row:hover,
+.codex-review-picker-row.is-selected {
+  background: var(--background-modifier-hover);
+}
+
+.codex-review-picker-row.is-selected {
+  color: var(--interactive-accent);
+}
+
+.codex-review-picker-icon,
+.codex-review-picker-icon svg {
+  width: 17px;
+  height: 17px;
+}
+
+.codex-review-picker-main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.codex-review-picker-title,
+.codex-review-picker-path {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.codex-review-picker-title {
+  color: var(--text-normal);
+  font-weight: var(--font-medium);
+}
+
+.codex-review-picker-path {
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+}
+
+.codex-review-thread-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 54px;
+  padding: 8px 10px;
+  border: 0;
+  border-bottom: 1px solid var(--background-modifier-border);
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  text-align: left;
+}
+
+.codex-review-thread-row:hover {
+  background: var(--background-modifier-hover);
+}
+
+.codex-review-thread-row.is-selected {
+  background: color-mix(in srgb, var(--interactive-accent) 12%, var(--background-primary));
+  box-shadow: inset 3px 0 0 var(--interactive-accent);
+}
+
+.codex-review-thread-row.is-selected .codex-review-thread-title {
+  color: var(--text-accent);
+}
+
+.codex-review-thread-actions {
+  justify-content: flex-end;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--background-modifier-border);
+}
+
+.codex-review-thread-main {
+  min-width: 0;
+}
+
+.codex-review-thread-section-title {
+  padding: 12px 10px 6px;
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+  font-weight: var(--font-semibold);
+}
+
+.codex-review-thread-title,
+.codex-review-thread-cwd {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.codex-review-thread-title {
+  color: var(--text-normal);
+  font-weight: var(--font-medium);
+}
+
+.codex-review-thread-provider {
+  display: inline-block;
+  margin-right: 6px;
+  color: var(--text-accent);
+  font-size: var(--font-ui-smaller);
+  font-weight: var(--font-medium);
+}
+
+.codex-review-thread-cwd,
+.codex-review-thread-date {
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+}
+
+.codex-review-device-code {
+  margin: 18px 0;
+  font-family: var(--font-monospace);
+  font-size: 24px;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.codex-review-subtabs {
+  position: sticky;
+  z-index: 3;
+  top: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2px;
+  margin-bottom: 10px;
+  padding: 2px;
+  border-radius: 6px;
+  background: var(--background-secondary);
+}
+
+.codex-review-subtabs button {
+  min-width: 0;
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+}
+
+.codex-review-subtabs button.is-active {
+  background: var(--background-primary);
+  box-shadow: var(--shadow-s);
+  color: var(--text-normal);
+}
+
+.codex-review-version-list {
+  border-top: 1px solid var(--background-modifier-border);
+}
+
+.codex-review-version {
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.codex-review-version-summary {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr) 18px;
+  align-items: center;
+  gap: 8px;
+  min-height: 58px;
+  padding: 8px 4px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.codex-review-version-summary::-webkit-details-marker {
+  display: none;
+}
+
+.codex-review-version-summary:hover {
+  background: var(--background-modifier-hover);
+}
+
+.codex-review-version-icon,
+.codex-review-version-chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+}
+
+.codex-review-version-icon svg,
+.codex-review-version-chevron svg {
+  width: 16px;
+  height: 16px;
+}
+
+.codex-review-version-chevron {
+  transition: transform 120ms ease;
+}
+
+.codex-review-version[open] .codex-review-version-chevron {
+  transform: rotate(90deg);
+}
+
+.codex-review-version-meta {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 2px;
+}
+
+.codex-review-version-date {
+  overflow: hidden;
+  color: var(--text-normal);
+  font-size: var(--font-ui-small);
+  font-weight: var(--font-medium);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.codex-review-version-source {
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+}
+
+.codex-review-version-body {
+  padding: 0 2px 12px 28px;
+}
+
+.codex-review-version-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 8px;
+}
+
+.codex-review-version-preview {
+  max-height: calc(100vh - 310px);
+  min-height: 90px;
+  padding: 10px;
+  overflow: auto;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+  background: var(--background-primary-alt);
+  font-size: var(--font-ui-small);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.codex-review-version-preview,
+.codex-review-version-preview * {
+  -webkit-user-select: text !important;
+  user-select: text !important;
+}
+
+.codex-review-version-preview > :first-child {
+  margin-top: 0;
+}
+
+.codex-review-version-preview > :last-child {
+  margin-bottom: 0;
+}
+
+.codex-review-version-content {
+  padding: 0 4px;
+}
+
+.codex-review-version-content > :first-child {
+  margin-top: 0;
+}
+
+.codex-review-version-content > :last-child {
+  margin-bottom: 0;
+}
+
+.codex-review-version-change {
+  margin: 10px 0;
+  overflow: hidden;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+}
+
+.codex-review-version-change + .codex-review-version-change {
+  margin-top: 0;
+}
+
+.codex-review-version-change-part {
+  padding: 8px 10px;
+}
+
+.codex-review-version-change-part + .codex-review-version-change-part {
+  border-top: 1px solid var(--background-modifier-border);
+}
+
+.codex-review-version-change-part.is-before {
+  background: color-mix(in srgb, var(--color-red) 9%, var(--background-primary-alt));
+}
+
+.codex-review-version-change-part.is-after {
+  background: color-mix(in srgb, var(--color-green) 9%, var(--background-primary-alt));
+}
+
+.codex-review-version-change-label {
+  margin-bottom: 5px;
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+  font-weight: var(--font-medium);
+}
+
+.codex-review-version-change-content > :first-child {
+  margin-top: 0;
+}
+
+.codex-review-version-change-content > :last-child {
+  margin-bottom: 0;
+}
+
+.codex-review-version-change-content .is-empty {
+  color: var(--text-faint);
+  font-style: italic;
+}
+
+.codex-review-history-heading,
+.codex-review-history-label,
+.codex-review-composer-actions {
+  display: flex;
+  align-items: center;
+}
+
+.codex-review-history-heading {
+  justify-content: space-between;
+  gap: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.codex-review-history-title {
+  min-width: 0;
+  overflow: hidden;
+  font-size: var(--font-ui-small);
+  font-weight: var(--font-medium);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.codex-review-history-frame {
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.codex-review-history {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 0;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-anchor: none;
+  scrollbar-gutter: stable;
+}
+
+/* Obsidian turns text selection off outside the editor, so the chat asks for it back. */
+.codex-review-history,
+.codex-review-history *,
+.codex-review-history-title {
+  -webkit-user-select: text !important;
+  user-select: text !important;
+}
+
+.codex-review-history-text,
+.codex-review-history-title,
+.codex-review-stream-text,
+.codex-review-final-content,
+.codex-review-activity-error {
+  cursor: text;
+}
+
+.codex-review-history button,
+.codex-review-history button *,
+.codex-review-history summary {
+  cursor: pointer;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+}
+
+.codex-review-new-messages {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  gap: 0;
+  max-width: calc(100% - 24px);
+  padding: 0;
+  transform: translateX(-50%);
+  border: 1px solid var(--background-modifier-border-hover);
+  border-radius: 50%;
+  box-shadow: var(--shadow-s);
+  background: var(--background-primary);
+  color: var(--text-normal);
+  font-size: var(--font-ui-smaller);
+  white-space: nowrap;
+}
+
+.codex-review-new-messages.has-unread {
+  width: auto;
+  height: 30px;
+  gap: 5px;
+  padding: 0 9px;
+  border-radius: 6px;
+}
+
+.codex-review-new-messages-label:empty {
+  display: none;
+}
+
+.codex-review-new-messages:hover {
+  border-color: var(--interactive-accent);
+  background: var(--background-modifier-hover);
+  color: var(--interactive-accent);
+}
+
+.codex-review-new-messages.is-hidden {
+  display: none;
+}
+
+.codex-review-new-messages svg {
+  width: 14px;
+  height: 14px;
+  flex: none;
+}
+
+.codex-review-history-message {
+  padding: 11px 2px;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.codex-review-history-message.is-user {
+  padding-left: 9px;
+  border-left: 2px solid var(--codex-review-accent);
+}
+
+.codex-review-history-label {
+  gap: 5px;
+  margin-bottom: 6px;
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+  font-weight: var(--font-medium);
+}
+
+.codex-review-history-message.is-reasoning .codex-review-history-label {
+  color: var(--codex-review-accent);
+}
+
+.codex-review-history-label svg {
+  width: 14px;
+  height: 14px;
+}
+
+.codex-review-history-text,
+.codex-review-history-packet {
+  overflow-wrap: anywhere;
+  color: var(--text-normal);
+  font-size: var(--font-ui-small);
+  line-height: 1.5;
+}
+
+.codex-review-history-message.is-reasoning .codex-review-history-text,
+.codex-review-history-message.is-commentary .codex-review-history-text {
+  white-space: pre-wrap;
+}
+
+.codex-review-history-text > :first-child,
+.codex-review-history-packet .markdown-rendered > :first-child {
+  margin-top: 0;
+}
+
+.codex-review-history-text > :last-child,
+.codex-review-history-packet .markdown-rendered > :last-child {
+  margin-bottom: 0;
+}
+
+.codex-review-history-packet summary {
+  cursor: pointer;
+  color: var(--text-muted);
+}
+
+.codex-review-history-packet[open] summary {
+  margin-bottom: 8px;
+}
+
+.codex-review-composer {
+  flex: none;
+  padding: 10px 0 2px;
+  border-top: 1px solid var(--background-modifier-border);
+  background: var(--background-primary);
+}
+
+.codex-review-composer textarea {
+  width: 100%;
+  min-height: 86px;
+  resize: vertical;
+}
+
+.codex-review-composer-actions {
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.codex-review-chat-tools,
+.codex-review-chat-primary-action,
+.codex-review-chat-goal,
+.codex-review-chat-attachments,
+.codex-review-chat-attachment {
+  display: flex;
+  align-items: center;
+}
+
+.codex-review-chat-tools {
+  gap: 1px;
+}
+
+.codex-review-chat-tools .codex-review-icon-button,
+.codex-review-chat-primary-action .codex-review-icon-button {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  padding: 0;
+  border-color: transparent;
+  box-shadow: none;
+  background: transparent;
+  color: var(--text-faint);
+}
+
+.codex-review-chat-tools .codex-review-icon-button:hover,
+.codex-review-chat-primary-action .codex-review-icon-button:hover {
+  border-color: var(--background-modifier-border);
+  background: var(--background-modifier-hover);
+  color: var(--text-muted);
+}
+
+.codex-review-chat-tools .codex-review-icon-button svg,
+.codex-review-chat-primary-action .codex-review-icon-button svg {
+  width: 13px;
+  height: 13px;
+}
+
+.codex-review-chat-tools .codex-review-icon-button.has-goal {
+  border-color: color-mix(in srgb, var(--interactive-accent) 55%, var(--background-modifier-border));
+  color: var(--interactive-accent);
+}
+
+.codex-review-chat-stop {
+  border-color: color-mix(in srgb, var(--color-red) 55%, var(--background-modifier-border));
+  background: color-mix(in srgb, var(--color-red) 12%, var(--background-primary));
+  color: var(--color-red);
+}
+
+.codex-review-chat-send.mod-cta {
+  border-color: var(--interactive-accent);
+  background: var(--interactive-accent);
+  color: var(--text-on-accent);
+}
+
+.codex-review-chat-send.is-hidden,
+.codex-review-chat-stop.is-hidden {
+  display: none;
+}
+
+.codex-review-live-user-message {
+  padding: 9px 2px 9px 8px;
+  border-left: 2px solid var(--interactive-accent);
+}
+
+.codex-review-chat-goal {
+  gap: 6px;
+  min-width: 0;
+  margin-bottom: 7px;
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+}
+
+.codex-review-chat-goal svg {
+  width: 14px;
+  height: 14px;
+  flex: none;
+}
+
+.codex-review-chat-goal > span:last-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.codex-review-chat-attachments {
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 7px;
+}
+
+.codex-review-chat-attachment {
+  max-width: 100%;
+  gap: 5px;
+  padding: 3px 4px 3px 7px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+  background: var(--background-secondary);
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+}
+
+.codex-review-chat-attachment > svg {
+  width: 13px;
+  height: 13px;
+  flex: none;
+}
+
+.codex-review-chat-attachment-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.codex-review-chat-attachment-remove.codex-review-icon-button {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  border: 0;
+}
+
+.codex-review-chat-attachment-remove svg {
+  width: 12px;
+  height: 12px;
+}
+
+.codex-review-local-file-picker {
+  display: none;
+}
+
+.codex-review-goal-modal textarea {
+  width: 100%;
+  min-height: 110px;
+  resize: vertical;
+}

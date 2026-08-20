@@ -1,0 +1,9 @@
+{
+  "id": "codex-review",
+  "name": "Agent Review",
+  "version": "0.25.3",
+  "minAppVersion": "1.7.2",
+  "description": "Review Markdown files with Codex or Claude, continue tasks, and compare applied changes.",
+  "author": "Elena",
+  "isDesktopOnly": true
+}
